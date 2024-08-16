@@ -30,6 +30,22 @@
 <br>
 <br>
 
+# 인프라 구성도
+
+## 1. 구성도
+
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/a54c7401-4cdc-4ede-81dc-20c2b0873ba9">
+</div>
+
+## 2. 구성도 상세 설명
+<div align="left">
+
+
+
+<br>
+<br>
+
 # 깃 컨벤션
 
 ## 1. 커밋 유형 지정
