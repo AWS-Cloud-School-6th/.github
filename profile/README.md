@@ -233,7 +233,25 @@ HTTP에서 HTTPS로 변경 후 CORS 이슈가 발생했다:
 </details>
 
 <details>
-<summary><strong>⚙️ Problem 5: Backend 서버의 JAR파일에서 DB 정보 하드코딩</strong></summary>
+<summary><strong>⚙️ Problem 5: Ingress에서 Backend가 정상 작동 하지 않는 현상</strong></summary>
+
+### 💡 Issue:
+
+Ingress의 Frontend는 정상 작동하는데 Backend는 비정상 작동:
+
+```bash
+❓ Why:
+- /healthz의 80포트로 잘 못된 상태 확인
+
+✅ Solution:
+🛠️ BackendConfig를 작성하여 /actuator/health의 8080으로 상태 확인 작성
+🛠️ 필요한 dependency들 추가하여 Backend 파일 Rebuild
+```
+
+</details>
+
+<details>
+<summary><strong>⚙️ Problem 6: Backend 서버의 JAR파일에서 DB 정보 하드코딩</strong></summary>
 
 ### 💡 Issue:
 
@@ -255,7 +273,7 @@ git에 commit하기 위해 코드를 점검하고 있는데 application.properti
 </details>
 
 <details>
-<summary><strong>⚙️ Problem 6: api 호출 시 네트워크 지연 실패</strong></summary>
+<summary><strong>⚙️ Problem 7: api 호출 시 네트워크 지연 실패</strong></summary>
 
 ### 💡 Issue:
 
@@ -277,7 +295,7 @@ https의 지정된 도메인으로 api 호출 시 네트워크 지연으로 실�
 </details>
 
 <details>
-<summary><strong>⚙️ Problem 7: api 호출이 되다가 안되는 현상</strong></summary>
+<summary><strong>⚙️ Problem 8: api 호출이 되다가 안되는 현상</strong></summary>
 
 ### 💡 Issue:
 
