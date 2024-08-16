@@ -53,8 +53,8 @@
 
 <br>
 <br>
-
-# 깃 컨벤션
+<details>
+<summary><strong>깃 컨벤션</strong></summary>
 
 ## 1. 커밋 유형 지정
 
@@ -142,7 +142,8 @@ git commit -m "FEAT: 회원가입 기능 추가
 - 코드 리뷰를 받는다.
 - 변경 request 단 경우 확인 후 resolve를 한다.
 - 스쿼시 머지를 한다.
-
+- 
+</details>
 ## 🚨 Troubleshooting
 
 <details>
