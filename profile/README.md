@@ -1,6 +1,6 @@
 <div align="center">
 	    <h2> AWS Cloud School 3 Tier Project</h2>
-    <h3> 일석2조 </h3>
+    <h3> 🤼‍♂️ 일석2조 </h3>
     <p> Platforms & Languages </p>
 <div>
 <div align="center">
@@ -92,7 +92,7 @@
 - 추적 가능하게 유지해주기
 - 너무 많은 문제를 한 커밋에 담으면 추적하기 어렵다.
 
-### 🖤 CLI에서 커밋 메시지 여러 줄로 작성하는 방법
+###  CLI에서 커밋 메시지 여러 줄로 작성하는 방법
 
 <aside>
 ✅ 쌍따옴표를 닫지 말고 개행하며 작성 → 다 작성한 후에 쌍따옴표를 닫으면 작성 완료
