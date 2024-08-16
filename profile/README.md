@@ -153,3 +153,149 @@ git commit -m "FEAT: 회원가입 기능 추가
 - 코드 리뷰를 받는다.
 - 변경 request 단 경우 확인 후 resolve를 한다.
 - 스쿼시 머지를 한다.
+
+## 🚨 Troubleshooting
+
+<details>
+<summary><strong>⚙️ Problem 1: Login 인증 정보가 요청에 포함되지 않음</strong></summary>
+
+### 💡 Issue:
+
+Login 인증 방식이 JSession이었는데, Backend에서 보내준 인증 정보를 브라우저에 저장했다가 유저가 보내는 요청에 포함되어야 했지만, 제대로 포함되지 않았다:
+
+```bash
+❓ Why:
+- withCredentials: True 옵션을 사용했음에도 불구하고 계속해서 302 에러가 발생함.
+
+✅ Solution:
+🛠️ package.json에 proxy 설정을 추가하여 문제를 해결함.
+
+```
+
+</details>
+
+<details>
+<summary><strong>⚙️ Problem 2: 배포 시 환경변수가 무효화됨</strong></summary>
+
+### 💡 Issue:
+
+로컬 환경에서 정상 작동하던 환경변수가 배포 시 무효화되었다:
+
+```bash
+❓ Why:
+- 배포 환경에서 환경변수가 제대로 로드되지 않음.
+
+✅ Solution:
+🛠️ package.json에서 .env 파일로 환경변수 위치를 변경하여 문제를 해결함.
+
+```
+
+</details>
+
+<details>
+<summary><strong>⚙️ Problem 3: 페이지 이동 시 Zustand 상태 관리가 되지 않음</strong></summary>
+
+### 💡 Issue:
+
+Frontend 상태 관리 라이브러리로 Zustand를 사용했는데, 페이지 이동 시 상태가 유지되지 않았다:
+
+```bash
+❓ Why:
+- Zustand가 기존의 상태 관리 라이브러리와 다르게 상태 저장을 특별하게 처리하기 때문
+
+✅ Solution:
+🛠️ Zustand의 상태 저장 방식을 로컬 스토리지를 사용하도록 변경하여 문제를 해결함.
+
+```
+
+</details>
+
+<details>
+<summary><strong>⚙️ Problem 4: HTTPS로 변경 후 CORS 이슈 발생</strong></summary>
+
+### 💡 Issue:
+
+HTTP에서 HTTPS로 변경 후 CORS 이슈가 발생했다:
+
+```bash
+❓ Why:
+
+- GET 요청은 가능했으나, POST 요청은 실패
+	GET 요청이 가능했던 이유는 크롬 브라우저에서 HTTPS로 바꿔서 보내는 옵션이 활성화되어있었음
+- 환경변수에 HTTP가 설정되어 있었음.
+
+✅ Solution:
+- CORS 문제로 인식하여 Backend 코드를 수정했으나 문제 해결 X
+🛠️ 환경변수 설정을 HTTP에서 HTTPS로 변경하여 문제를 해결함.
+
+```
+
+</details>
+
+<details>
+<summary><strong>⚙️ Problem 5: Backend 서버의 JAR파일에서 DB 정보 하드코딩</strong></summary>
+
+### 💡 Issue:
+
+git에 commit하기 위해 코드를 점검하고 있는데 application.properties에 DB 정보가 하드코딩:
+
+```bash
+❓ Why:
+- git에 배포 시 DB의 정보가 그대로 들어가면 피해를 볼 수도 있기 때문
+
+✅ Solution:
+🛠️ 배포 환경이 GCP의 GKE이므로 ConfigMap을 작성
+🛠️ Backend 서버 deployment에 ConfigMap의 값들을 환경변수로 등록
+🛠️ Backend 서버가 실행되면서 환경변수로 DB 정보를 가지고 동작
+
+🔧 Improvement:
+- Secret을 통해 구현
+```
+
+</details>
+
+<details>
+<summary><strong>⚙️ Problem 6: api 호출 시 네트워크 지연 실패</strong></summary>
+
+### 💡 Issue:
+
+https의 지정된 도메인으로 api 호출 시 네트워크 지연으로 실패:
+
+```
+❓ Why:
+- 개인적으로 구입한 SSL을 사용하여 Ingress 파일에 적용
+- frontend 호출 도메인과 api 호출 도메인은 Ingress안에서 분리
+- SSL이 frontend에 연결된 도메인만 유효
+
+✅ Solution:
+🛠️ 이미 구입한 SSL에 새로운 도메인을 추가 불가능
+🛠️ GCP의 Managed-Certificate를 발급
+🛠️ 두 도메인 모두에 유효하게 만들어 Ingress에 적용
+🛠️ api 호출 성공 확인
+```
+
+</details>
+
+<details>
+<summary><strong>⚙️ Problem 7: api 호출이 되다가 안되는 현상</strong></summary>
+
+### 💡 Issue:
+
+초반에만 api 호출이 되다가 api 호출이 안되며 404 에러:
+
+```bash
+❓ Why:
+- Backend를 Deployment를 통해 배포
+- Ingress를 통해 LoadBalancing
+- 세션이 유지가 되지 않아 문제 발생
+
+✅ Solution:
+🛠️ 세션을 유지하기 위해 Ingress에 Session Affinity 추가
+🛠️ GKE의 BackendConfig를 통해 Cookie로 Session Affinity 적용
+🛠️ 서버가 상태 정보를 가지고 있게 되므로 좋은 솔루션 X
+
+🔧 Improvement:
+- redis 등을 활용하여 상태 정보를 외부로 빼서 서버가 상태 정보를 가지지 않게 구현
+```
+
+</details>
