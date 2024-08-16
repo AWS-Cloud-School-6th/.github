@@ -53,7 +53,9 @@
 
 <br>
 <br>
+
 ## 깃 컨벤션
+
 <details>
 <summary><strong> Check before you push </strong></summary>
 
@@ -145,7 +147,9 @@ git commit -m "FEAT: 회원가입 기능 추가
 - 스쿼시 머지를 한다.
 - 
 </details>
+
 ---
+
 ## 🚨 Troubleshooting
 
 <details>
