@@ -1,6 +1,5 @@
 <div align="center">
 	    <h2> AWS Cloud School 3 Tier Project</h2>
-    <h3> 🤼‍♂️ 일석2조 </h3>
     <p> Platforms & Languages </p>
 <div>
 <div align="center">
